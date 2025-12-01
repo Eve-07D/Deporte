@@ -9,19 +9,18 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
-    {
-        Schema::create('deportistas', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-        });
-    }
+    public function up()
+{
+    Schema::create('deportistas', function (Blueprint $table) {
+        $table->id();
+        $table->string('nombre');
+        $table->foreignId('pais_id')->constrained('paises')->onDelete('cascade');
+        $table->foreignId('disciplina_id')->constrained('disciplinas')->onDelete('cascade');
+        $table->date('fecha_nacimiento');
+        $table->integer('estatura');
+        $table->integer('peso');
+        $table->timestamps();
+    });
+}
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
-    {
-        Schema::dropIfExists('deportistas');
-    }
 };
